@@ -19,7 +19,7 @@ import java.util.List;
 public class AddressBookIo {
     private static final String File = "addressbook.txt";
     private static final String SAMPLE_CSV_FILE_TO_WRITE = "./data.csv";
-
+    private static final String SAMPLE_JSON_FILE = "./data.json";
 
     public static void main(String[] args) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         ContactInfo[] contactsArr = {
@@ -30,8 +30,10 @@ public class AddressBookIo {
         AddressBookIo io = new AddressBookIo();
         io.writeDataToFile(Arrays.asList(contactsArr));
         io.writeDataToCSVFile(Arrays.asList(contactsArr));
+        io.writeDataToJSON(Arrays.asList(contactsArr));
         io.readContacts();
         io.readContactsOfCSVFile();
+        io.readContactsOfJSONFile();
 
     }
 
@@ -59,6 +61,14 @@ public class AddressBookIo {
         }
     }
 
+    public void writeDataToJSON(List<ContactInfo> contacts) throws IOException {
+        Gson gson = new Gson();
+        Writer writer = Files.newBufferedWriter(Paths.get(SAMPLE_JSON_FILE));
+        gson.toJson(contacts, writer);
+        writer.close();
+    }
+
+
     public void readContacts() {
         System.out.println("\n<----- The Content Of Txt file is ----->");
         try {
@@ -76,6 +86,17 @@ public class AddressBookIo {
             Files.lines(new File(SAMPLE_CSV_FILE_TO_WRITE).toPath()).forEach(System.out::println);
             long entries = Files.lines(new File(SAMPLE_CSV_FILE_TO_WRITE).toPath()).count();
             System.out.println("\nThe Number of entries in CSVFile are: " + entries);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readContactsOfJSONFile() {
+        System.out.println("\n<----- The Content Of JSON file is ----->");
+        try {
+            Files.lines(new File(SAMPLE_JSON_FILE).toPath()).forEach(System.out::println);
+            long entries = Files.lines(new File(SAMPLE_JSON_FILE).toPath()).count();
+            System.out.println("\nThe Number of entries in JSOnFile are: " + entries);
         } catch (IOException e) {
             e.printStackTrace();
         }
