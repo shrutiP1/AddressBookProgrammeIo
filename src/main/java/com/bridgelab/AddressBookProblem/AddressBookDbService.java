@@ -47,7 +47,6 @@ public class AddressBookDbService
                String state=resultSet.getString("state");
                String zip=resultSet.getString("zip");
                LocalDate startDate=resultSet.getDate("start").toLocalDate();
-
                empPayRollList.add(new ContactInfo(id,firstName,lastName,phoneNo,email,address,city,state,zip,startDate));
 
            }
@@ -90,24 +89,26 @@ public class AddressBookDbService
 
     }
     public List<ContactInfo> getAddressBookModifiedWithinRange(LocalDate startDate, LocalDate endDate) throws CustomeException {
-        String sql=String.format("select *from contact_db where start BETWEEN %s AND %s",Date.valueOf(startDate),Date.valueOf(endDate));
-        return this.getDataOfAdressBookWithingRange(sql);
+        String sql=String.format("select *from contact_db where start BETWEEN '%s' AND '%s' ",Date.valueOf(startDate),Date.valueOf(endDate));
+        return this.getDataOfAddressBookWithingRange(sql);
     }
 
-    private List<ContactInfo> getDataOfAdressBookWithingRange(String sql) throws CustomeException
+    private List<ContactInfo> getDataOfAddressBookWithingRange(String sql) throws CustomeException
     {
-        List<ContactInfo> contactInfoList=new ArrayList<>();
-        try(Connection connection=this.getConnection())
-        {
-            Statement statement=connection.createStatement();
-            ResultSet resultSet=statement.executeQuery(sql);
-            contactInfoList=this.getEmployeePayRollData(resultSet);
 
-        }
-        catch (SQLException throwables) {
-            throw new CustomeException("Query Failed !");
-        }
-        return contactInfoList;
+           List<ContactInfo> contactInfoList=new ArrayList<>();
+            try(Connection connection=this.getConnection())
+            {
+                Statement statement=connection.createStatement();
+                ResultSet resultSet=statement.executeQuery(sql);
+                contactInfoList=this.getEmployeePayRollData(resultSet);
+            }
+
+            catch (SQLException | CustomeException throwables) {
+                throw new CustomeException("Query Failed !");
+            }
+
+          return contactInfoList;
     }
 
     public int updateCityUsingStatement(String firstname, String name) throws CustomeException {

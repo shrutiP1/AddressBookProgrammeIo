@@ -21,14 +21,16 @@ public class AddressBookDBTest
         List<ContactInfo> addressBookDataList=addressBookDb.readAddressBookDb();
         addressBookDb.updateEmployeeCity("Shruti","Mumbai");
         boolean result=addressBookDb.checkAddressBookNameshouldSyncWithDB("Shruti");
+        Assertions.assertTrue(result);
     }
     @Test
     public void givenDateRange_WhenRetrieved_shouldMatchWithCount() throws CustomeException {
         AddressBookDb addressBookDb=new AddressBookDb();
         List<ContactInfo> addressBookDataList=addressBookDb.readAddressBookDb();
-        LocalDate startDate=LocalDate.of(2018,01,01);;
+        LocalDate startDate=LocalDate.of(2019,01,01);;
         LocalDate endDate=LocalDate.now();
         List<ContactInfo> contactInfoList=addressBookDb.readAddressBookContactsModifiedWithinRange(startDate,endDate);
+        Assertions.assertEquals(2,contactInfoList.size());
     }
 
 }
