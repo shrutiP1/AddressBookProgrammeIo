@@ -7,7 +7,9 @@ import java.util.List;
 public class AddressBookDbService
 {
        private static AddressBookDbService addressBookDbService;
-       public static AddressBookDbService getInstance()
+      private PreparedStatement contactDataStatement;
+
+    public static AddressBookDbService getInstance()
         { if(addressBookDbService==null)
                    return   addressBookDbService=new AddressBookDbService();
           return addressBookDbService;
@@ -61,17 +63,61 @@ public class AddressBookDbService
 
           }
           catch (SQLException throwables) {
-              throwables.printStackTrace();
+              throw new CustomeException("Query Failed !");
           }
           return empPayRollList;
 
 
       }
+    public List<ContactInfo> getContactList(String firstName) throws CustomeException {
+         List<ContactInfo> contactInfoList=null;
+         if(this.contactDataStatement==null)
+             this.prepareStatementForEmployeeData();
+         try
+         {
+             contactDataStatement.setString(1,firstName);
+             ResultSet resultSet=contactDataStatement.executeQuery();
+             contactInfoList=this.getEmployeePayRollData(resultSet);
+             return contactInfoList;
+
+         }
+         catch (SQLException throwables)
+         {
+             throw new CustomeException("Query Failed !");
+         }
+
+    }
+    public int updateCityUsingStatement(String firstname, String name) throws CustomeException {
+         String sql=String.format("Update contact_db set city='%s' where firstName='%s'",name,firstname);
+         try(Connection connection=this.getConnection())
+         {
+             Statement statement=connection.createStatement();
+             return statement.executeUpdate(sql);
+         }
+         catch (SQLException throwables)
+         {
+             throw new CustomeException("Query Failed !");
+         }
+
+     }
       public List<ContactInfo> readData() throws CustomeException {
             String sql="SELECT * FROM contact_db;";
             return this.getDataWhenSqlIsGiven(sql);
 
        }
+    private void prepareStatementForEmployeeData() throws CustomeException {
+          try
+          {
+              Connection connection=this.getConnection();
+              String sql="Select * from contact_db where firstName=?;";
+              contactDataStatement=connection.prepareStatement(sql);
+          }
+          catch (SQLException e)
+          {
+              throw new CustomeException("Query Failed !");
+          }
+    }
+
 
 
 }

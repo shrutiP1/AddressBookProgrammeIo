@@ -1,5 +1,7 @@
 package com.bridgelab.AddressBookProblem;
 
+import java.util.Objects;
+
 public class ContactInfo
 {
     private  int id;
@@ -61,6 +63,7 @@ public class ContactInfo
         this.lastName = lastName;
     }
 
+
     public String getAddress() {
         return address;
     }
@@ -121,5 +124,13 @@ public class ContactInfo
                 "PhoneNumber: " + phoneNumber + '\n' +
                 "EmailId: " + emailId + '\n';
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactInfo that = (ContactInfo) o;
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(emailId, that.emailId);
+    }
+
 
 }

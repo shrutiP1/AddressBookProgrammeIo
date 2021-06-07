@@ -14,5 +14,12 @@ public class AddressBookDBTest
         List<ContactInfo> addressBookDataList=addressBookDb.readAddressBookDb();
         Assertions.assertEquals(4,addressBookDataList.size());
     }
+    @Test
+    public void givenNewCity_WhenUpdated_shouldSyncWithDb() throws CustomeException {
+        AddressBookDb addressBookDb=new AddressBookDb();
+        List<ContactInfo> addressBookDataList=addressBookDb.readAddressBookDb();
+        addressBookDb.updateEmployeeCity("Shruti","Mumbai");
+        boolean result=addressBookDb.checkAddressBookNameshouldSyncWithDB("Shruti");
+    }
 
 }
