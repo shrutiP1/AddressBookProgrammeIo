@@ -2,6 +2,16 @@ package com.bridgelab.AddressBookProblem;
 
 public class ContactInfo
 {
+    private  int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String firstName;
     private String lastName;
     private String address;
@@ -12,6 +22,19 @@ public class ContactInfo
     private String emailId;
 
     public ContactInfo(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String emailId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneNumber = phoneNumber;
+        this.emailId = emailId;
+    }
+
+    public ContactInfo(int id, String firstName, String lastName, String phoneNo, String email, String address, String city, String state, String zip)
+    {
+        this.id=id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

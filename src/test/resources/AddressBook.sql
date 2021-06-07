@@ -45,3 +45,16 @@ select AddressBook_db.firstName from AddressBook_db INNER JOIN address ON Addres
 select address.city,count(address.city) from AddressBook_db INNER JOIN address ON AddressBook_db.firstName=address.name group by address.city;
 
 
+create table contact_db(
+   id int auto_increment primary key,
+   firstName varchar(58) not null,
+   lastName varchar(256) not null,
+   phone_no varchar(30),
+   email_id varchar(60),
+   address varchar(250) not null,
+   city varchar(50) not null,
+   state varchar(60) not null,
+	zip int
+);
+SELECT *FROM contact_db;
+
