@@ -1,6 +1,7 @@
 package com.bridgelab.AddressBookProblem;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +46,9 @@ public class AddressBookDbService
                String city=resultSet.getString("city");
                String state=resultSet.getString("state");
                String zip=resultSet.getString("zip");
+               LocalDate startDate=resultSet.getDate("start").toLocalDate();
 
-               empPayRollList.add(new ContactInfo(id,firstName,lastName,phoneNo,email,address,city,state,zip));
+               empPayRollList.add(new ContactInfo(id,firstName,lastName,phoneNo,email,address,city,state,zip,startDate));
 
            }
            return empPayRollList;
@@ -87,6 +89,27 @@ public class AddressBookDbService
          }
 
     }
+    public List<ContactInfo> getAddressBookModifiedWithinRange(LocalDate startDate, LocalDate endDate) throws CustomeException {
+        String sql=String.format("select *from contact_db where start BETWEEN %s AND %s",Date.valueOf(startDate),Date.valueOf(endDate));
+        return this.getDataOfAdressBookWithingRange(sql);
+    }
+
+    private List<ContactInfo> getDataOfAdressBookWithingRange(String sql) throws CustomeException
+    {
+        List<ContactInfo> contactInfoList=new ArrayList<>();
+        try(Connection connection=this.getConnection())
+        {
+            Statement statement=connection.createStatement();
+            ResultSet resultSet=statement.executeQuery(sql);
+            contactInfoList=this.getEmployeePayRollData(resultSet);
+
+        }
+        catch (SQLException throwables) {
+            throw new CustomeException("Query Failed !");
+        }
+        return contactInfoList;
+    }
+
     public int updateCityUsingStatement(String firstname, String name) throws CustomeException {
          String sql=String.format("Update contact_db set city='%s' where firstName='%s'",name,firstname);
          try(Connection connection=this.getConnection())

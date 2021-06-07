@@ -3,6 +3,7 @@ package com.bridgelab.AddressBookProblem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,14 @@ public class AddressBookDBTest
         List<ContactInfo> addressBookDataList=addressBookDb.readAddressBookDb();
         addressBookDb.updateEmployeeCity("Shruti","Mumbai");
         boolean result=addressBookDb.checkAddressBookNameshouldSyncWithDB("Shruti");
+    }
+    @Test
+    public void givenDateRange_WhenRetrieved_shouldMatchWithCount() throws CustomeException {
+        AddressBookDb addressBookDb=new AddressBookDb();
+        List<ContactInfo> addressBookDataList=addressBookDb.readAddressBookDb();
+        LocalDate startDate=LocalDate.of(2018,01,01);;
+        LocalDate endDate=LocalDate.now();
+        List<ContactInfo> contactInfoList=addressBookDb.readAddressBookContactsModifiedWithinRange(startDate,endDate);
     }
 
 }

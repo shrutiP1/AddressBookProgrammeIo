@@ -1,5 +1,6 @@
 package com.bridgelab.AddressBookProblem;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,9 @@ public class AddressBookDb
     public List<ContactInfo> readAddressBookDb() throws CustomeException {
         this.contactDataList=addressBookDbService.readData();
         return contactDataList;
+    }
+    public List<ContactInfo> readAddressBookContactsModifiedWithinRange(LocalDate startDate, LocalDate endDate) throws CustomeException {
+        return addressBookDbService.getAddressBookModifiedWithinRange(startDate,endDate);
     }
 
     public void updateEmployeeCity(String firstName, String city) throws CustomeException {
@@ -42,6 +46,7 @@ public class AddressBookDb
         return contactInfoList.get(0).equals(getInformation(firstName));
 
     }
+
 
 
 }

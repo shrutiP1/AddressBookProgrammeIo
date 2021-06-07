@@ -1,9 +1,20 @@
 package com.bridgelab.AddressBookProblem;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ContactInfo
 {
+    private  LocalDate start;
+
+    public LocalDate getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDate start) {
+        this.start = start;
+    }
+
     private  int id;
 
     public int getId() {
@@ -34,7 +45,7 @@ public class ContactInfo
         this.emailId = emailId;
     }
 
-    public ContactInfo(int id, String firstName, String lastName, String phoneNo, String email, String address, String city, String state, String zip)
+    public ContactInfo(int id, String firstName, String lastName, String phoneNo, String email, String address, String city, String state, String zip, LocalDate start)
     {
         this.id=id;
         this.firstName = firstName;
@@ -45,6 +56,7 @@ public class ContactInfo
         this.zip = zip;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
+        this.start=start;
     }
 
     public String getFirstName() {
@@ -124,13 +136,13 @@ public class ContactInfo
                 "PhoneNumber: " + phoneNumber + '\n' +
                 "EmailId: " + emailId + '\n';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactInfo that = (ContactInfo) o;
-        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(emailId, that.emailId);
+        return id == that.id && Objects.equals(start, that.start) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(emailId, that.emailId);
     }
-
 
 }
