@@ -33,6 +33,10 @@ public class AddressBookDb {
         return addressBookDbService.getContactsOfAddressBookGroupedByState();
     }
 
+    public void addNewContactsInAddressBook(String firstName, String lastName, String phone, String email, String address, String city, String state, String pincode, LocalDate start) throws CustomeException {
+        contactDataList.add(addressBookDbService.addContactsInAddressBook(firstName, lastName, phone, email, address, city, state, pincode, start));
+    }
+
     public void updateEmployeeCity(String firstName, String city) throws CustomeException {
         int result = addressBookDbService.updateCityUsingStatement(firstName, city);
         if (result == 0)
@@ -40,6 +44,7 @@ public class AddressBookDb {
         ContactInfo contactInfo = this.getInformation(firstName);
         if (contactInfo != null) contactInfo.setFirstName(firstName);
     }
+
 
     private ContactInfo getInformation(String firstName) {
         return contactDataList.stream()

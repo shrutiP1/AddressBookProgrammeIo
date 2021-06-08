@@ -76,13 +76,13 @@ public class AddressBookDbService {
         try {
             contactDataStatement.setString(1, firstName);
             ResultSet resultSet = contactDataStatement.executeQuery();
+
             contactInfoList = this.getEmployeePayRollData(resultSet);
             return contactInfoList;
 
         } catch (SQLException throwables) {
             throw new CustomeException("Query Failed !");
         }
-
     }
 
     public List<ContactInfo> getAddressBookModifiedWithinRange(LocalDate startDate, LocalDate endDate) throws CustomeException {
@@ -151,5 +151,48 @@ public class AddressBookDbService {
         }
     }
 
+    public ContactInfo addContactsInAddressBook(String firstName, String lastName, String phone, String email, String address, String city, String state, String pincode, LocalDate start) throws CustomeException {
+        int empId = -1;
+        ContactInfo contactInfo = null;
+        Connection connection = null;
+        try {
+            connection = this.getConnection();
+            connection.setAutoCommit(false);
+        } catch (SQLException throwables) {
+            throw new CustomeException("Query Failed !");
+        }
 
+        try (Statement statement = connection.createStatement()) {
+
+            String sql = String.format("insert into contact_db(firstName,lastName,phone_no,email_id,address,city,state,zip,start) values('%s','%s','%s','%s','%s','%s','%s','%s','%s')", firstName, lastName, phone, email, address, city, state, pincode, Date.valueOf(start));
+            int rowAffected = statement.executeUpdate(sql);
+            if (rowAffected == 1) {
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    System.out.println("came");
+                    empId = resultSet.getInt(1);
+                }
+                System.out.println(empId);
+                contactInfo = new ContactInfo(empId, firstName, lastName, phone, email, address, city, state, pincode, start);
+                System.out.println("came");
+            }
+            return contactInfo;
+
+        } catch (SQLException throwables) {
+            try {
+                connection.rollback();
+                return contactInfo;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            throw new CustomeException("Query Failed !");
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        }
+    }
 }

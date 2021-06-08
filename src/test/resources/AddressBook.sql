@@ -57,4 +57,8 @@ create table contact_db(
 	zip int
 );
 SELECT *FROM contact_db;
+Update contact_db set city='Mumbai' where firstName='Shruti';
+select *from contact_db where start BETWEEN cast('2018-02-09'AS date) and cast('2020-03-04' as date);
+select state,count(id) as count from contact_db group by state;
+insert into contact_db(firstName,lastName,phone_no,email_id,address,city,state,zip) values('Karan','Patel','91020202','karanPatel@gmail.com','Building no-6','Ahemdbad','Gujarat','502104');
 
