@@ -101,4 +101,18 @@ public class AddressBookIo {
             e.printStackTrace();
         }
     }
+    public static long countEntries()
+    {
+        long entries=0;
+        try
+        {
+            entries=Files.lines(new File(File).toPath()).count();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return entries;
+    }
+
 }

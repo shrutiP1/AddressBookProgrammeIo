@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -43,14 +45,15 @@ public class AddressBookDBTest {
         Assertions.assertTrue(contactCountToStateMap.get("Maharashtra").equals(2) && contactCountToStateMap.get("Karnataka").equals(1));
     }
     @Test
-    public void givenNewContact_WhenManipulated_shouldSyncWithDb() throws CustomeException {
+    public void givenNewContact_WhenManipulated_shouldSyncWithDb() throws CustomeException, SQLException {
         AddressBookDb addressBookDb = new AddressBookDb();
         List<ContactInfo> addressBookDataList = addressBookDb.readAddressBookDb();
+        //System.out.println(addressBookDataList);
         LocalDate date=LocalDate.of(2020,02,01);
         addressBookDb.addNewContactsInAddressBook("Ayesha","Patil","92929929","sheyru@gmail.com","Building no 8","Mangaon","Raigad","402104", date);
         boolean result=addressBookDb.checkAddressBookNameshouldSyncWithDB("Ayesha");
         Assertions.assertTrue(result);
-
     }
+
 
 }

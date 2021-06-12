@@ -1,7 +1,9 @@
 package com.bridgelab.AddressBookProblem;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +35,7 @@ public class AddressBookDb {
         return addressBookDbService.getContactsOfAddressBookGroupedByState();
     }
 
-    public void addNewContactsInAddressBook(String firstName, String lastName, String phone, String email, String address, String city, String state, String pincode, LocalDate start) throws CustomeException {
+    public void addNewContactsInAddressBook(String firstName, String lastName, String phone, String email, String address, String city, String state, String pincode, LocalDate start) throws CustomeException, SQLException {
         contactDataList.add(addressBookDbService.addContactsInAddressBook(firstName, lastName, phone, email, address, city, state, pincode, start));
     }
 
@@ -58,6 +60,9 @@ public class AddressBookDb {
         return contactInfoList.get(0).equals(getInformation(firstName));
 
     }
+
+
+
 
 
 }

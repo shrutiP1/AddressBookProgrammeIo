@@ -44,19 +44,16 @@ public class ContactInfo
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
     }
+    public ContactInfo(String firstName, String lastName, String phoneNo, String email, String address, String city, String state, String zip, LocalDate start)
+    {
+        this(firstName,lastName,address,city,state,zip,phoneNo,email);
+        this.start=start;
+    }
 
     public ContactInfo(int id, String firstName, String lastName, String phoneNo, String email, String address, String city, String state, String zip, LocalDate start)
     {
+        this(firstName,lastName,address,city,state,zip,phoneNo,email);
         this.id=id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.phoneNumber = phoneNumber;
-        this.emailId = emailId;
-        this.start=start;
     }
 
     public String getFirstName() {
@@ -143,6 +140,10 @@ public class ContactInfo
         if (o == null || getClass() != o.getClass()) return false;
         ContactInfo that = (ContactInfo) o;
         return id == that.id && Objects.equals(start, that.start) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(emailId, that.emailId);
+    }
+    public int hashCode()
+    {
+        return Objects.hash(id, firstName, lastName, address, city, state, zip, phoneNumber, emailId, start);
     }
 
 }
