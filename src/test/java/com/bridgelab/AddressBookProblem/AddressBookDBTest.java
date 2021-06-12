@@ -54,6 +54,19 @@ public class AddressBookDBTest {
         boolean result=addressBookDb.checkAddressBookNameshouldSyncWithDB("Ayesha");
         Assertions.assertTrue(result);
     }
+    @Test
+    public void givenMultiplecontacts_whenAdded_shouldMatchCount() throws CustomeException {
 
+        ContactInfo[] arrayOfContact={
+                new ContactInfo("Dadu","Patil","00000","shsh@gmail.com","aaa","mangaon","raigad","402104",LocalDate.now()),
+                new ContactInfo("Mark","ZUKERBERG","10000","sh@gmail.com","BBB","Mangaon","Raigad","402",LocalDate.now())
+        };
+        AddressBookDb addressBookDb=new AddressBookDb();
+        List<ContactInfo> addressBookDataList=addressBookDb.readAddressBookDb();
+        addressBookDb.addAddressBookContactsUsingThread(Arrays.asList(arrayOfContact));
+        List<ContactInfo> addressBookDataList1=addressBookDb.readAddressBookDb();
+        System.out.println(addressBookDataList1.size());
+        Assertions.assertEquals(3,addressBookDb.countEntries());
+    }
 
 }

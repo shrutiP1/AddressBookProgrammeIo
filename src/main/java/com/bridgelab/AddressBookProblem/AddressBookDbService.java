@@ -11,6 +11,7 @@ public class AddressBookDbService {
     private static AddressBookDbService addressBookDbService;
     private PreparedStatement contactDataStatement;
 
+
     public static AddressBookDbService getInstance() {
         if (addressBookDbService == null)
             return addressBookDbService = new AddressBookDbService();
@@ -175,15 +176,18 @@ public class AddressBookDbService {
                 }
                 System.out.println("empid " +empId);
                 contactInfo = new ContactInfo(empId, firstName, lastName, phone, email, address, city, state, pincode, start);
+                connection.commit();
+                return contactInfo;
             }
-            return contactInfo;
 
-        } catch (SQLException throwables)
+        }
+        catch (SQLException throwables)
         {
             connection.rollback();
             return contactInfo;
         }
-        finally {
+        finally
+        {
             try {
                 connection.close();
             } catch (SQLException throwables) {
@@ -191,6 +195,34 @@ public class AddressBookDbService {
             }
 
         }
+        return null;
+    }
+    synchronized ContactInfo  addMultipleContactsUsingThread(String firstName, String lastName, String phone, String email, String address, String city, String state, String pincode, LocalDate start) throws CustomeException, SQLException {
+        int empID=-1;
+        ContactInfo contactInfo = null;
+        Connection connection = null;
+        connection = this.getConnection();
+
+            Statement statement = connection.createStatement();
+            String sql = String.format("insert into contact_db(firstName,lastName,phone_no,email_id,address,city,state,zip,start) values('%s','%s','%s','%s','%s','%s','%s','%s','%s')", firstName, lastName, phone, email, address, city, state, pincode, Date.valueOf(start));
+            int rowAffected = statement.executeUpdate(sql,statement.RETURN_GENERATED_KEYS);
+
+            if (rowAffected == 1)
+            {
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    empID = resultSet.getInt(1);
+                }
+                System.out.println("empid " +empID);
+
+            }
+            contactInfo = new ContactInfo(firstName, lastName, phone, email, address, city, state, pincode, start);
+            System.out.println(contactInfo.getFirstName()+" "+contactInfo.getAddress());
+            return contactInfo;
+
+
+
+
     }
 }
 
