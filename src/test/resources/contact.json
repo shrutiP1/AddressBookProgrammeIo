@@ -1,0 +1,14 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "firstname": "bhushan",
+      "lastname": "mahajan",
+      "address": "gangapur road",
+      "city": "nashik",
+      "state": "maharashtra",
+      "zip": 422013,
+      "phonenumber": "3333333333"
+    }
+  ]
+}
