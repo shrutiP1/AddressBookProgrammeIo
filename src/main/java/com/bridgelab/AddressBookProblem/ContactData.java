@@ -2,20 +2,20 @@ package com.bridgelab.AddressBookProblem;
 
 public class ContactData
 {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private int zip;
-    private String phoneNumber;
-    private String emailId;
+    public int id;
+    public String firstname;
+    public String lastName;
+    public String address;
+    public String city;
+    public String state;
+    public int zip;
+    public String phoneNumber;
+    public String emailId;
 
-    public ContactData(int id, String firstName, String lastName, String address, String city, String state, int zip, String phoneNumber, String emailId)
+    public ContactData(int id, String firstname, String lastName, String address, String city, String state, int zip, String phoneNumber, String emailId)
     {
         this.id = id;
-        this.firstName = firstName;
+        this.firstname = firstname;
         this.lastName = lastName;
         this.address = address;
         this.city = city;
@@ -29,7 +29,7 @@ public class ContactData
     public String toString() {
         return "ContactData{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                ", firstName='" + firstname + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +

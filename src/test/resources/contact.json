@@ -3,12 +3,11 @@
     {
       "id": 1,
       "firstname": "bhushan",
-      "lastname": "mahajan",
       "address": "gangapur road",
       "city": "nashik",
       "state": "maharashtra",
       "zip": 422013,
-      "phonenumber": "3333333333"
+      "phoneNumber": "3333333"
     },
     {
       "id": 2,

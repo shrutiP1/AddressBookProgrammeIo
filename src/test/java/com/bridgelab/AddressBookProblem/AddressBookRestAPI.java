@@ -82,5 +82,23 @@ public class AddressBookRestAPI
         long entries=contactRestAPI.countEntires();
         Assertions.assertEquals(5,entries);
     }
+    @Test
+    public void givenUpdatedSalary_whenUpdated_shouldReturn2000ResponseCode()
+    {
+        ContactRestAPI contactRestAPI;
+        ContactData[] dataArray=getContactDetails();
+        contactRestAPI=new ContactRestAPI(Arrays.asList(dataArray));
+        contactRestAPI.updateContact("bhushan","3333333");
+        ContactData contactData=contactRestAPI.getContact("bhushan");
+        RequestSpecification requestSpecification=RestAssured.given();
+        requestSpecification.header("Content-Type","application/json");
+        String contactJson=new Gson().toJson(contactData);
+        requestSpecification.body(contactJson);
+        Response response=requestSpecification.put(RestAssured.baseURI+"/contacts/"+contactData.id);
+        System.out.println("After updating we have "+response.asString());
+        int statuscode=response.statusCode();
+        Assertions.assertEquals(200,statuscode);
+
+    }
 
 }

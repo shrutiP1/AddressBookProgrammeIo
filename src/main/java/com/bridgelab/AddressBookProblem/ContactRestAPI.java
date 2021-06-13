@@ -6,7 +6,7 @@ import java.util.List;
 public class ContactRestAPI 
 {
 
-    private  List<ContactData> dataList;
+    public static List<ContactData> dataList;
 
     public ContactRestAPI(List<ContactData> contactData) 
     {
@@ -23,4 +23,18 @@ public class ContactRestAPI
     {
         this.dataList.add(contactData1);
     }
+    public ContactData getContact(String name)
+    {
+        return this.dataList.stream().filter(dataItem->dataItem.firstname.equals(name)).findFirst().orElse(null);
+    }
+    public void updateContact(String name, String phone)
+    {
+        ContactData contactData=this.getContact(name);
+        if(contactData!=null)
+        {
+            contactData.phoneNumber=phone;
+        }
+    }
+
+
 }
