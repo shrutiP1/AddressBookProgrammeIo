@@ -18,4 +18,9 @@ public class ContactRestAPI
         System.out.println(dataList);
         return dataList.size();
     }
+
+    public void addEmployeeToList(ContactData contactData1)
+    {
+        this.dataList.add(contactData1);
+    }
 }

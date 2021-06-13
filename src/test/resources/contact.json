@@ -9,6 +9,17 @@
       "state": "maharashtra",
       "zip": 422013,
       "phonenumber": "3333333333"
+    },
+    {
+      "id": 2,
+      "firstName": "SHRUTI",
+      "lastName": "Patil",
+      "address": "Pune",
+      "city": "pune",
+      "state": "Maharshtra",
+      "zip": 402104,
+      "phoneNumber": "9130416631",
+      "emailId": "shrutipatil13798@gmail.com"
     }
   ]
 }
