@@ -83,7 +83,7 @@ public class AddressBookRestAPI
         Assertions.assertEquals(5,entries);
     }
     @Test
-    public void givenUpdatedSalary_whenUpdated_shouldReturn2000ResponseCode()
+    public void givenUpdatedSalary_whenUpdated_shouldReturn200ResponseCode()
     {
         ContactRestAPI contactRestAPI;
         ContactData[] dataArray=getContactDetails();
@@ -98,6 +98,22 @@ public class AddressBookRestAPI
         System.out.println("After updating we have "+response.asString());
         int statuscode=response.statusCode();
         Assertions.assertEquals(200,statuscode);
+    }
+    @Test
+    public void givenContactToDelete_WhenDelted_shouldReturn200ResponseCode()
+    {
+        ContactRestAPI contactRestAPI;
+        ContactData[] contactData=getContactDetails();
+        contactRestAPI=new ContactRestAPI(Arrays.asList(contactData));
+        ContactData contactData1=contactRestAPI.getContact("bhushan");
+        RequestSpecification requestSpecification=RestAssured.given();
+        requestSpecification.header("Content-Type","application/json");
+        Response response=requestSpecification.delete(RestAssured.baseURI+"/contacts"+contactData1.id);
+        System.out.println("After Deleting");
+        System.out.println(getContactDetails());
+        int statusCode=response.getStatusCode();
+        Assertions.assertEquals(204,statusCode);
+
 
     }
 
