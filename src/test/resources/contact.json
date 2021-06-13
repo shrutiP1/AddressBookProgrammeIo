@@ -20,6 +20,39 @@
       "zip": 402104,
       "phoneNumber": "9130416631",
       "emailId": "shrutipatil13798@gmail.com"
+    },
+    {
+      "id": 3,
+      "firstName": "vijay",
+      "lastName": "darade",
+      "address": "Mangalmurti Building",
+      "city": "pune",
+      "state": "maharashtra",
+      "zip": 422013,
+      "phoneNumber": "9999999999",
+      "emailId": "vijay@gmail.com"
+    },
+    {
+      "id": 4,
+      "firstName": "shashank",
+      "lastName": "adka",
+      "address": "Kachri rd",
+      "city": "Mumbai",
+      "state": "maharashtra",
+      "zip": 422013,
+      "phoneNumber": "8888888888",
+      "emailId": "shashank@gmail.com"
+    },
+    {
+      "id": 5,
+      "firstName": "yash",
+      "lastName": "kulkarni",
+      "address": "gangapur rd",
+      "city": "Ahemdbad",
+      "state": "maharashtra",
+      "zip": 422013,
+      "phoneNumber": "6666666666",
+      "emailId": "yash@gmail.com"
     }
   ]
 }

@@ -57,5 +57,30 @@ public class AddressBookRestAPI
         Assertions.assertEquals(2,entries);
 
     }
+    @Test
+    public void givenMultipleContact_WhenAdded_shouldMatchCount()
+    {
+        ContactRestAPI contactRestAPI;
+        ContactData[] dataArray=getContactDetails();
+        contactRestAPI=new ContactRestAPI(Arrays.asList(dataArray));
+        ContactData[] arrayOfData={
+                new ContactData(0, "vijay", "darade", "Mangalmurti Building", "pune", "maharashtra", 422013, "9999999999", "vijay@gmail.com"),
+                new ContactData(0, "shashank", "adka", "Kachri rd", "Mumbai", "maharashtra", 422013, "8888888888", "shashank@gmail.com"),
+                new ContactData(0, "yash", "kulkarni", "gangapur rd", "Ahemdbad", "maharashtra", 422013, "6666666666", "yash@gmail.com"),
+
+        };
+
+        for(ContactData contactData:arrayOfData)
+        {
+            Response response=addContactToJsonServer(contactData);
+            contactData=new Gson().fromJson(response.asString(),ContactData.class);
+            contactRestAPI.addEmployeeToList(contactData);
+
+        }
+        System.out.println("<--------After adding to Json Server--------->");
+        getContactDetails();
+        long entries=contactRestAPI.countEntires();
+        Assertions.assertEquals(5,entries);
+    }
 
 }
