@@ -100,7 +100,7 @@ public class AddressBookRestAPI
         Assertions.assertEquals(200,statuscode);
     }
     @Test
-    public void givenContactToDelete_WhenDelted_shouldReturn200ResponseCode()
+    public void givenContactToDelete_WhenDeleted_shouldReturn204ResponseCode()
     {
         ContactRestAPI contactRestAPI;
         ContactData[] contactData=getContactDetails();
