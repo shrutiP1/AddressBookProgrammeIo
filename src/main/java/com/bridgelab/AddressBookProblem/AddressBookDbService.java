@@ -59,7 +59,7 @@ public class AddressBookDbService {
         List<ContactInfo> empPayRollList = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("Select *from contact_db");
+            ResultSet resultSet = statement.executeQuery(sql);
             empPayRollList = this.getEmployeePayRollData(resultSet);
 
         } catch (SQLException throwables) {

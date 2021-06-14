@@ -42,7 +42,7 @@ public class AddressBookDb {
         if (result == 0)
             throw new CustomeException("Query Failed To Process");
         ContactInfo contactInfo = this.getInformation(firstName);
-        if (contactInfo != null) contactInfo.setFirstName(firstName);
+        if (contactInfo != null) contactInfo.setCity(city);
     }
 
 
