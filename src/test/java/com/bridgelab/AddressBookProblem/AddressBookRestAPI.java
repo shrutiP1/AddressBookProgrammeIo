@@ -21,7 +21,7 @@ public class AddressBookRestAPI
     private ContactData[] getContactDetails()
     {
         Response response=RestAssured.get(RestAssured.baseURI+"/contacts");
-        System.out.println("Employess in Json Server are "+response.asString());
+        System.out.println("Employees in Json Server are "+response.asString());
         return new Gson().fromJson(response.asString(),ContactData[].class);
     }
     private Response addContactToJsonServer(ContactData contactData1)
@@ -113,7 +113,6 @@ public class AddressBookRestAPI
         System.out.println(getContactDetails());
         int statusCode=response.getStatusCode();
         Assertions.assertEquals(204,statusCode);
-
 
     }
 
