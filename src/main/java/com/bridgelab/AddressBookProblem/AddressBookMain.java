@@ -21,6 +21,21 @@ public class AddressBookMain
         name = input.next();
         addressBook.add(new MutipleAddressBook(name));
         System.out.println("New Address Book Created With name " + name);
+        for(int i=0;i<addressBook.size();i++)
+        {
+            System.out.println(addressBook.get(i));
+            if(addressBook.get(i).firstName.equals(name))
+            {
+                System.out.println("ALREADY EXIST");
+                MutipleAddressBook();
+            }
+
+        }
+        addressBook.add(new MutipleAddressBook(name));
+        System.out.println("New AddressBook created with "+name);
+        System.out.println("1");
+        bookNumber++;
+        menu();
     }
 
     public void selectAddressBook() {
@@ -35,8 +50,7 @@ public class AddressBookMain
     }
 
     public void menu() {
-        Scanner scan = new Scanner(System.in);
-        MutipleAddressBook();
+
         System.out.println("-----Address Book Menu-----");
         System.out.println("1. Add Contact.");
         System.out.println("2. Edit Contact.");
@@ -49,7 +63,7 @@ public class AddressBookMain
         System.out.println("9:Print Contacts Sorted By State");
         System.out.println("10:Print Contacts Sorted By Zip");
         System.out.print("Enter Your Choice: ");
-        int option = scan.nextInt();
+        int option = input.nextInt();
         switch (option) {
             case 1:
                 selectAddressBook();
@@ -65,7 +79,7 @@ public class AddressBookMain
                 MutipleAddressBook();
                 break;
             case 5:
-                System.out.println("--These are the Address Book Presesnt--");
+                System.out.println("--These are the Address Book Present--");
                 selectAddressBook();
                 addressBook.get(bookNumber).printContacts();
                 break;
@@ -87,6 +101,15 @@ public class AddressBookMain
             default:
                 System.exit(0);
 
+        }
+        System.out.println("If you want to see menu options again then press 1 ");
+        if(input.nextInt()==1)
+        {
+            menu();
+        }
+        else
+        {
+            System.exit(0);
         }
 
 

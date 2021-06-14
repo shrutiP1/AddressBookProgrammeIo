@@ -21,11 +21,9 @@ public class MutipleAddressBook
     public boolean checkName() {
         System.out.println("Enter First Name");
         firstName = input.nextLine();
-        for (index = 0; index < contacts.size(); index++) {
-            if (firstName.equals(contacts.get(index).getFirstName())) {
-                System.out.println("Contact found");
-                return true;
-            }
+        for (index = 0; index < contacts.size(); index++)
+        {
+            return contacts.stream().map(n->n.getFirstName()).anyMatch(n->n.equals(firstName));
         }
         return false;
     }
